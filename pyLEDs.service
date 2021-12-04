@@ -1,0 +1,18 @@
+# /etc/systemd/system/pyLED.service
+
+[Unit]
+Description=signifer LEDs service
+Requires=docker.service
+After=docker.service
+
+[Service]
+WorkingDirectory=/home/pi/PYSIG/
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
+TimeoutStartSec=0
+Restart=always
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target
